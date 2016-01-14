@@ -21,4 +21,22 @@ RSpec.describe Skill, type: :model do
 
     expect(skill).to_not be_valid
   end
+
+  context "methods" do
+    it "#increase_status" do
+      skill = Skill.create(name: "anything", description: "well described")
+
+      expect(skill.status).to eq("beginner")
+
+      skill.increase_status
+
+      expect(skill.status).to eq("intermediate")
+    end
+
+    it "will not increase status beyond 'expert'" do
+      skill = Skill.create(name: "anything", description: "well described", status: "expert")
+      skill.increase_status
+      expect(skill.status).to eq("expert")
+    end
+  end
 end
