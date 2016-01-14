@@ -5,9 +5,16 @@ class Skill < ActiveRecord::Base
 
   def increase_status
     index = statuses.index(status)
-
     if (0..1).include?(index)
       index += 1
+      self.status = statuses[index]
+    end
+  end
+
+  def decrease_status
+    index = statuses.index(status)
+    if (1..2).include?(index)
+      index -= 1
       self.status = statuses[index]
     end
   end

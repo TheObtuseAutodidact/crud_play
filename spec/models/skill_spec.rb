@@ -38,5 +38,22 @@ RSpec.describe Skill, type: :model do
       skill.increase_status
       expect(skill.status).to eq("expert")
     end
+
+    it "#decrease_status" do
+      skill = Skill.create(name: "anything", description: "well described", status: "intermediate")
+
+      expect(skill.status).to eq("intermediate")
+
+      skill.decrease_status
+
+      expect(skill.status).to eq("beginner")
+    end
+
+    it "will not decrease status beyond 'expert'" do
+      skill = Skill.create(name: "anything", description: "well described", status: "beginner")
+      skill.decrease_status
+      expect(skill.status).to eq("beginner")
+    end
+
   end
 end
